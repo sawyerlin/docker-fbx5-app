@@ -1,0 +1,24 @@
+version: "2"
+services:
+    php-fpm:
+        image: sawyerlin/docker-fpm-app
+        container_name: ocs-cgi
+        volumes:
+            - ./:/var/www
+        ports:
+            - 9000:9000
+
+    web:
+        container_name: ocs
+        build: apache
+        volumes:
+            - ./ocs-freeboxv5:/var/www
+        environment:
+            - VIRTUALHOST=htdocs
+            - PORT=9000
+            - PHP=php-fpm
+            - APP=ocs-freeboxv5
+networks:
+    default:
+        external:
+            name: ocs-freeboxv5
