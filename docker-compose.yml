@@ -1,8 +1,9 @@
 version: "2"
 services:
     cache:
-        container_name: ocs-memcached
-        image: memcached
+        container_name: ocs-redis
+        image: redis
+
     php-fpm:
         image: sawyerlin/docker-fpm-app
         container_name: ocs-cgi
