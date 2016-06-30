@@ -7,6 +7,8 @@ services:
     php-fpm:
         image: sawyerlin/docker-fpm-app
         container_name: ocs-cgi
+        depends_on:
+            - cache
         volumes:
             - ./:/var/www
         ports:
@@ -17,6 +19,8 @@ services:
         build: apache
         volumes:
             - ./ocs-freeboxv5:/var/www
+        depends_on:
+            - php-fpm
         environment:
             - VIRTUALHOST=htdocs
             - PORT=9000
